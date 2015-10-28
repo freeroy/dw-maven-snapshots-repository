@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.developerworld.maven</groupId>
+	<artifactId>dw-maven-parent</artifactId>
+	<version>0.0.3-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>dw maven pom parent</name>
+	<url>http://www.developerworld.org</url>
+	<description>所有dw内应用maven的项目，均会直接后间接应用到本pom的配置</description>
+
+	<organization>
+		<name>DeveloperWorld.org</name>
+		<url>http://www.developerworld.org/</url>
+	</organization>
+
+	<!-- 开发者列表 -->
+	<developers>
+		<developer>
+			<id>Roy</id>
+			<name>Roy Huang</name>
+			<email>huangruoru@live.cn</email>
+			<roles>
+				<role>Owner</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<!-- 定义配置信息 -->
+	<properties>
+		<java.version>1.5</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- scm配置 -->
+		<scm.connection>scm:git:ssh://github.com/freeroy/${project.artifactId}.git</scm.connection>
+		<scm.developerConnection>scm:git:ssh://git@github.com/freeroy/${project.artifactId}.git</scm.developerConnection>
+		<scm.url>http://github.com/freeroy/${project.artifactId}</scm.url>
+		<!-- 仓库配置 -->
+		<distribution.server>http://repository.developerworld.org</distribution.server>
+		<!-- <distribution.releaseRepository>${distribution.server}/content/repositories/releases</distribution.releaseRepository> 
+			<distribution.snapshotRepository>${distribution.server}/content/repositories/snapshots</distribution.snapshotRepository> -->
+		<!-- 部署在本地 -->
+		<distribution.releaseRepository>file:E:/dw-local-maven-repository/releases/</distribution.releaseRepository>
+		<distribution.snapshotRepository>file:E:/dw-local-maven-repository/snapshots/</distribution.snapshotRepository>
+	</properties>
+
+	<!-- 配置svn发布位置 -->
+	<scm>
+		<connection>${scm.connection}</connection>
+		<developerConnection>${scm.developerConnection}</developerConnection>
+		<url>${scm.url}</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<!-- 设置github部署的maven仓库 -->
+	<repositories>
+		<repository>
+			<id>dw-maven-releases-repository</id>
+			<url>https://raw.githubusercontent.com/freeroy/dw-maven-releases-repository/master</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>dw-maven-snapshots-repository</id>
+			<url>https://raw.githubusercontent.com/freeroy/dw-maven-snapshots-repository/master</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- 任务跟踪系统 -->
+	<issueManagement>
+		<system>GitHub Issue Management</system>
+		<url>https://github.com/freeroy/${project.artifactId}/issues</url>
+	</issueManagement>
+	<!-- 持续集成系统 <ciManagement> <system>Travis CI</system> <url>https://travis-ci.org/freeroy/${scm.project_name}</url> 
+		</ciManagement> -->
+
+	<!-- 配置部署的仓库 -->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<url>${distribution.releaseRepository}</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>${distribution.snapshotRepository}</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<!-- 设置资源响应动态配置 -->
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/sql</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/sql</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.sql</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<!-- 设置测试资源响应动态配置 -->
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+				<filtering>false</filtering>
+			</testResource>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</testResource>
+			<testResource>
+				<directory>${project.basedir}/src/test/sql</directory>
+				<filtering>false</filtering>
+			</testResource>
+			<testResource>
+				<directory>${project.basedir}/src/test/sql</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.sql</include>
+				</includes>
+			</testResource>
+		</testResources>
+
+		<!-- 插件管理 -->
+		<pluginManagement>
+			<plugins>
+				<!-- 设定编译版本插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<!-- 使用UTF-8处理资源文件插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<!-- 源代码打包插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.2.1</version>
+				</plugin>
+				<!-- 文档打包插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.9.1</version>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<charset>${project.build.sourceEncoding}</charset>
+					</configuration>
+				</plugin>
+				<!-- 站点信息生成插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.3</version>
+				</plugin>
+				<!-- 测试覆盖率报告生成插件 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<formats>
+							<format>xml</format>
+							<format>html</format>
+						</formats>
+					</configuration>
+				</plugin>
+				<!-- 带包war插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<!-- 文件打包插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<!-- 依赖关系配置插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.10</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<!-- 配置插件 -->
+		<plugins>
+			<!-- 设定编译版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<!-- 使用UTF-8处理资源文件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 可选配置 -->
+	<profiles>
+		<!-- 特殊配置项 -->
+		<profile>
+			<id>sources</id>
+			<build>
+				<plugins>
+					<!-- 打包源码 -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>javadoc</id>
+			<build>
+				<plugins>
+					<!-- 打包文档 -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>site</id>
+			<build>
+				<plugins>
+					<!-- 生成信息站点 -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-site-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-site</id>
+								<phase>package</phase>
+								<goals>
+									<goal>site</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>cobertura</id>
+			<build>
+				<plugins>
+					<!-- 生成测试覆盖率报告 -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>cobertura-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-cobertura-report</id>
+								<phase>package</phase>
+								<goals>
+									<goal>clean</goal>
+									<!-- <goal>check</goal> -->
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
