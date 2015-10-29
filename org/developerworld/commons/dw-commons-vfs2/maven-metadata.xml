@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.developerworld.commons</groupId>
+  <artifactId>dw-commons-vfs2</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.2-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20151029083750</lastUpdated>
+  </versioning>
+</metadata>

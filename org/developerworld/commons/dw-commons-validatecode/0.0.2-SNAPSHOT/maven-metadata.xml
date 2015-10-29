@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.developerworld.commons</groupId>
+  <artifactId>dw-commons-validatecode</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20151029.085119</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20151029085119</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.0.2-20151029.085119-1</value>
+        <updated>20151029085119</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.0.2-20151029.085119-1</value>
+        <updated>20151029085119</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

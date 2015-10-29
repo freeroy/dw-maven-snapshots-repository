@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.developerworld.commons</groupId>
+  <artifactId>dw-commons-servlet</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.2-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20151029080543</lastUpdated>
+  </versioning>
+</metadata>
